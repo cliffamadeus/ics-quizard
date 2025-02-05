@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonContent, IonPage, IonInput, IonButton, IonAlert, IonHeader, IonToolbar, IonTitle, IonBackButton, IonButtons, IonSelect, IonSelectOption, IonItem } from '@ionic/react';
+import { IonContent, IonPage, IonInput, IonButton, IonAlert, IonHeader, IonToolbar, IonTitle, IonBackButton, IonButtons, IonSelect, IonSelectOption, IonItem, IonText, IonCol, IonGrid, IonRow, IonInputPasswordToggle } from '@ionic/react';
 import { supabase } from '../utils/supabaseClient';
 import { useHistory } from 'react-router-dom';
 
@@ -84,85 +84,117 @@ const Register: React.FC = () => {
           <IonButtons slot="start">
             <IonBackButton defaultHref="/ics-quizard/login" />
           </IonButtons>
-          <IonTitle>Register Student</IonTitle>
+          <IonTitle></IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
+        <IonItem>
+          <IonText color="secondary">
+            <h1>Signup</h1>
+          </IonText>
+        </IonItem>
+        <br></br>
 
-        <IonItem>
-          <IonInput label="Institutional Email" type="email"
-            placeholder="Enter Email"
-            value={email}
-            onIonChange={(e) => setEmail(e.detail.value!)}>
-            </IonInput>
-        </IonItem>
+        <IonGrid>
+          <IonRow>
+            <IonCol size="5">
+                <IonInput
+                  label="First Name"
+                  type="text"
+                  labelPlacement="floating" 
+                  fill="outline"
+                  placeholder="Enter First Name"
+                  value={firstName}
+                  onIonChange={(e) => setFirstName(e.detail.value!)}
+                />
+            </IonCol >
+              <IonCol size="2">
+                  <IonInput
+                  label="M.I"
+                  type="text"
+                  labelPlacement="floating" 
+                  fill="outline"
+                  placeholder="M.I"
+                  value={middleInitial}
+                  onIonChange={(e) => setMiddleInitial(e.detail.value!)}
+                />
+            </IonCol>
+            <IonCol>
+                  <IonInput
+                  label="Enter Last Name"
+                  type="text"
+                  labelPlacement="floating" 
+                  fill="outline"
+                  placeholder="Enter Last Name"
+                  value={lastName}
+                  onIonChange={(e) => setLastName(e.detail.value!)}
+                  />
+            </IonCol>
+          </IonRow>
+        </IonGrid>
 
-        <IonItem>
-          <IonInput
-            label="First Name"
-            type="text"
-            placeholder="Enter First Name"
-            value={firstName}
-            onIonChange={(e) => setFirstName(e.detail.value!)}
-          />
-        </IonItem>
+        <IonGrid>
+          <IonRow>
+            <IonCol size="5">
+                <IonInput label="Institutional Email" type="email"
+                placeholder="Institutional Email"
+                labelPlacement="floating" 
+                fill="outline"
+                value={email}
+                onIonChange={(e) => setEmail(e.detail.value!)}>
+                </IonInput>
+            </IonCol>
+            <IonCol>
+              <IonSelect
+                label="Year Level"
+                labelPlacement="floating" 
+                fill="outline"
+                value={yearLevel}
+                placeholder="Select Year Level"
+                onIonChange={(e) => setYearLevel(e.detail.value!)}
+              >
+                <IonSelectOption value="1">1st Year</IonSelectOption>
+                <IonSelectOption value="2">2nd Year</IonSelectOption>
+                <IonSelectOption value="3">3rd Year</IonSelectOption>
+                <IonSelectOption value="4">4th Year</IonSelectOption>
+              </IonSelect>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
         
-        <IonItem>
-          <IonInput
-            label="Middle Inititial"
-            type="text"
-            placeholder="Enter Middle Initial"
-            value={middleInitial}
-            onIonChange={(e) => setMiddleInitial(e.detail.value!)}
-          />
-        </IonItem>
-
-        <IonItem>
-          <IonInput
-            label="Enter Last Name"
-            type="text"
-            placeholder="Enter Last Name"
-            value={lastName}
-            onIonChange={(e) => setLastName(e.detail.value!)}
-          />
-        </IonItem>
-        
-        <IonItem>
-          <IonSelect
-            label="Year Level"
-            value={yearLevel}
-            placeholder="Select Year Level"
-            onIonChange={(e) => setYearLevel(e.detail.value!)}
-          >
-            <IonSelectOption value="1">1st Year</IonSelectOption>
-            <IonSelectOption value="2">2nd Year</IonSelectOption>
-            <IonSelectOption value="3">3rd Year</IonSelectOption>
-            <IonSelectOption value="4">4th Year</IonSelectOption>
-          </IonSelect>
-        </IonItem>
-
-        <IonItem>
-          <IonInput
-            label="Password"
-            type="password"
-            placeholder="Enter Password"
-            value={password}
-            onIonChange={(e) => setPassword(e.detail.value!)}
-          />
-        </IonItem>
-        
-        <IonItem>
-          <IonInput
-            label="Confirm Password"
-            type="password"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onIonChange={(e) => setConfirmPassword(e.detail.value!)}
-          />
-        </IonItem>
-        
+        <IonGrid>
+          <IonRow>
+            <IonCol size="auto">
+              <IonInput
+                label="Password"
+                type="password"
+                labelPlacement="floating" 
+                fill="outline"
+                placeholder="Enter Password"
+                value={password}
+                onIonChange={(e) => setPassword(e.detail.value!)}
+              >
+              <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
+              </IonInput>
+            </IonCol>
+            <IonCol>
+                <IonInput
+                label="Confirm Password"
+                type="password"
+                labelPlacement="floating" 
+                fill="outline"
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onIonChange={(e) => setConfirmPassword(e.detail.value!)}
+              >
+              <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
+              </IonInput>
+              
+            </IonCol>
+          </IonRow>
+        </IonGrid>
       
-        <IonButton expand="full" onClick={handleRegister}>
+        <IonButton expand="full" onClick={handleRegister}  shape="round">
           Register
         </IonButton>
 
