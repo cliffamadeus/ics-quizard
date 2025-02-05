@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonContent, IonPage, IonInput, IonButton, IonAlert, IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonText, IonRouterLink, useIonRouter } from '@ionic/react';
+import { IonContent, IonPage, IonInput, IonButton, IonAlert, IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton, IonText, IonRouterLink, useIonRouter, IonInputPasswordToggle, IonAvatar, IonCol, IonGrid, IonRow } from '@ionic/react';
 import { supabase } from '../utils/supabaseClient';
 import { useHistory } from 'react-router-dom';
 
@@ -39,11 +39,21 @@ const Login: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Login</IonTitle>
+          <IonTitle class='ion-text-center'>ICS Quizard</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        <h1>Login</h1>
+
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100px' }}>
+          <IonAvatar style={{ 
+            border: '1px solid #007bff',   
+            boxShadow: '0px 4px 10px rgba(0, 123, 255, 0.5)',  
+          }}>
+              <img alt="Silhouette of a person's head" src="https://static.vecteezy.com/system/resources/previews/023/783/837/non_2x/wizard-logo-icon-design-vector.jpg" />
+            </IonAvatar>
+          </div>
+
+        <h3 className='ion-text-center'>Student Login</h3>
         <IonInput
           type="email"
           placeholder="Email"
@@ -55,7 +65,9 @@ const Login: React.FC = () => {
           placeholder="Password"
           value={password}
           onIonChange={(e) => setPassword(e.detail.value!)}
-        />
+        >
+        <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
+        </IonInput> 
         <IonButton expand="full" onClick={handleLogin}>
           Login
         </IonButton>
