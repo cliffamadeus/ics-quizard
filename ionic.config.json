@@ -1,0 +1,7 @@
+{
+  "name": "ics-quizard",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
