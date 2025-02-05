@@ -70,7 +70,7 @@ const Login: React.FC = () => {
           >
             <img 
               alt="Silhouette of a person's head" 
-              src=""
+              src="https://raw.githubusercontent.com/cliffamadeus/ics-quizard/refs/heads/feature/loginAuth/src/img/logo.PNG"
               style={{ 
                 width: '100%', 
                 height: '100%',
