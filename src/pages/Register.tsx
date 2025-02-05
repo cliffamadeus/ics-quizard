@@ -29,7 +29,7 @@ const Register: React.FC = () => {
       setAlertMessage('Registration successful! Please check your email to confirm your account.');
       setShowAlert(true);
       // Redirect to the login page after successful registration
-      history.push('/login');
+      history.push('/ics-quizard/login');
     }
   };
 
@@ -38,7 +38,7 @@ const Register: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/login" />
+            <IonBackButton defaultHref="/ics-quizard/login" />
           </IonButtons>
           <IonTitle>Register</IonTitle>
         </IonToolbar>

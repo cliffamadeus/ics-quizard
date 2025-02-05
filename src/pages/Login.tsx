@@ -9,7 +9,6 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState('');
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
-  const history = useHistory();
   const navigation = useIonRouter();
 
   const handleLogin = async () => {
@@ -62,7 +61,7 @@ const Login: React.FC = () => {
         </IonButton>
 
         <IonText>
-          <p>Don't have an account? <IonRouterLink routerLink="/register">Register here</IonRouterLink></p>
+          <p>Don't have an account? <IonRouterLink routerLink="/ics-quizard/register">Register here</IonRouterLink></p>
         </IonText>
 
         <IonAlert
