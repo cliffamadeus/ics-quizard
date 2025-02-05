@@ -17,23 +17,42 @@ const Login: React.FC = () => {
       setShowAlert(true);
       return;
     }
-
-    const { error } = await supabase.auth.signInWithPassword({
+  
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
-
+  
     if (error) {
       setAlertMessage(error.message);
       setShowAlert(true);
-    } else {
-      setAlertMessage('Login successful!');
-      setShowAlert(true);
-      // Redirect to another page or perform additional actions
-      //history.push('/dashboard'); // Example: Redirect to a dashboard page
-      navigation.push('/ics-quizard/app','root','replace');
+      return;
     }
+  
+    // Fetch student details from the database
+    const { data: student, error: studentError } = await supabase
+      .from('students')
+      .select('first_name, email')
+      .eq('email', email)
+      .single();
+  
+    if (studentError || !student) {
+      setAlertMessage('User data not found.');
+      setShowAlert(true);
+      return;
+    }
+  
+    // Store user data in session storage
+    sessionStorage.setItem('userFirstName', student.first_name);
+    sessionStorage.setItem('userEmail', student.email);
+  
+    setAlertMessage(`Welcome, ${student.first_name}! You have successfully logged in.`);
+    setShowAlert(true);
+  
+    // Redirect to the app dashboard
+    navigation.push('/ics-quizard/app', 'root', 'replace');
   };
+  
 
   return (
     <IonPage>

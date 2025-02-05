@@ -1,15 +1,26 @@
-import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar, useIonRouter, IonAlert } from '@ionic/react';
+import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar, useIonRouter, IonAlert, IonItem, IonLabel } from '@ionic/react';
 import './Home.css';
 import { logOutOutline } from 'ionicons/icons';
 import { supabase } from '../utils/supabaseClient';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Home: React.FC = () => {
   const navigation = useIonRouter();
-  const [showAlert, setShowAlert] = React.useState(false);
-  const [alertMessage, setAlertMessage] = React.useState('');
-  const [alertHeader, setAlertHeader] = React.useState('');
-  
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [alertHeader, setAlertHeader] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [email, setEmail] = useState('');
+
+  useEffect(() => {
+    // Retrieve stored session data
+    const storedFirstName = sessionStorage.getItem('userFirstName');
+    const storedEmail = sessionStorage.getItem('userEmail');
+
+    if (storedFirstName) setFirstName(storedFirstName);
+    if (storedEmail) setEmail(storedEmail);
+  }, []);
+
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
     if (error) {
@@ -20,6 +31,7 @@ const Home: React.FC = () => {
       setAlertHeader('Logout Successful');
       setAlertMessage('You have successfully logged out.');
       setShowAlert(true);
+      sessionStorage.clear(); // Clear session data on logout
       navigation.push('/ics-quizard/', 'root', 'replace');
     }
   };
@@ -40,9 +52,17 @@ const Home: React.FC = () => {
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Blank</IonTitle>
+            <IonTitle size="large">Welcome</IonTitle>
           </IonToolbar>
         </IonHeader>
+
+        {/* Display Student Info */}
+        <IonItem>
+          <IonLabel>
+            <h2>Welcome, {firstName}!</h2>
+            <p>Email: {email}</p>
+          </IonLabel>
+        </IonItem>
       </IonContent>
 
       {/* Alert to show logout result */}
