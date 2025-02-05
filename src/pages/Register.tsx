@@ -37,23 +37,39 @@ const Register: React.FC = () => {
 
   const confirmRegistration = async () => {
     // Proceed with registration if user confirms details
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
     });
-
+  
     if (error) {
       setAlertMessage(error.message);
       setShowAlert(true);
-    } else {
-      setAlertMessage('Registration successful! Please check your email to confirm your account.');
-      setShowAlert(true);
-      // Redirect to the login page after successful registration
-      history.push('/ics-quizard/login');
+      return;
     }
-
-    setShowConfirmationAlert(false); // Close confirmation alert
+  
+    // Insert user details into the "students" table
+    const { error: insertError } = await supabase.from('students').insert([
+      {
+        email,
+        first_name: firstName,
+        middle_initial: middleInitial,
+        last_name: lastName,
+        year_level: parseInt(yearLevel),
+      },
+    ]);
+  
+    if (insertError) {
+      setAlertMessage(insertError.message);
+      setShowAlert(true);
+      return;
+    }
+  
+    setAlertMessage('Registration successful! Please check your email to confirm your account.');
+    setShowAlert(true);
+    history.push('/ics-quizard/login'); // Redirect to login page
   };
+  
 
   const cancelRegistration = () => {
     setAlertMessage('Registration canceled.');
