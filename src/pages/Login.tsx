@@ -32,7 +32,7 @@ const Login: React.FC = () => {
       setShowAlert(true);
       // Redirect to another page or perform additional actions
       //history.push('/dashboard'); // Example: Redirect to a dashboard page
-      navigation.push('/app','root','replace');
+      navigation.push('/ics-quizard/app','root','replace');
     }
   };
 
