@@ -56,38 +56,56 @@ const Login: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle class='ion-text-center'>ICS Quizard</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent className="ion-padding">
-
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100px' }}>
-          <IonAvatar style={{ 
-            border: '1px solid #007bff',   
-            boxShadow: '0px 4px 10px rgba(0, 123, 255, 0.5)',  
-          }}>
-              <img alt="Silhouette of a person's head" src="https://static.vecteezy.com/system/resources/previews/023/783/837/non_2x/wizard-logo-icon-design-vector.jpg" />
-            </IonAvatar>
+     
+      <IonContent className="ion-padding" style={{ }} >
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100px', marginTop: '35%' }}>
+          <IonAvatar 
+            style={{ 
+              boxShadow: '0px 2px 10px rgba(0, 123, 255, 0.5)',  
+              width: '30vw',  
+              height: '30vw', 
+              overflow: 'hidden',
+              marginTop:'-4rem'  
+            }}
+          >
+            <img 
+              alt="Silhouette of a person's head" 
+              src=""
+              style={{ 
+                width: '100%', 
+                height: '100%',
+                objectFit: 'cover'  
+              }} 
+            />
+          </IonAvatar>
           </div>
-
-        <h3 className='ion-text-center'>Student Login</h3>
+        <br></br>
+        <h1 className='ion-text-center'>ICS QUIZARD</h1>
+        <h4 className='ion-text-center'>Student Login</h4>
         <IonInput
           type="email"
-          placeholder="Email"
+          labelPlacement="floating" 
+          fill="outline"
+          label="Institutional Email"
+          placeholder="email@nbsc.edu.ph"
           value={email}
           onIonChange={(e) => setEmail(e.detail.value!)}
         />
+        <br></br>
         <IonInput
           type="password"
-          placeholder="Password"
+          labelPlacement="floating" 
+          fill="outline"
+          label="Password"
+          placeholder="Enter Password"
           value={password}
           onIonChange={(e) => setPassword(e.detail.value!)}
         >
         <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
         </IonInput> 
-        <IonButton expand="full" onClick={handleLogin}>
+
+        <br></br>
+        <IonButton expand="full" onClick={handleLogin}  shape="round">
           Login
         </IonButton>
 
