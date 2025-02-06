@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { IonContent, IonPage, IonInput, IonButton, IonAlert, IonHeader, IonToolbar, IonTitle, IonBackButton, IonButtons, IonSelect, IonSelectOption, IonItem, IonText, IonCol, IonGrid, IonRow, IonInputPasswordToggle } from '@ionic/react';
+import { IonContent, IonPage, IonInput, IonButton, IonAlert, IonHeader, IonToolbar, IonTitle, IonBackButton, IonButtons, IonSelect, IonSelectOption, IonItem, IonText, IonCol, IonGrid, IonRow, IonInputPasswordToggle, useIonRouter } from '@ionic/react';
 import { supabase } from '../utils/supabaseClient';
 import { useHistory } from 'react-router-dom';
 
 const Register: React.FC = () => {
+  const navigation = useIonRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -77,12 +78,19 @@ const Register: React.FC = () => {
     setShowConfirmationAlert(false); // Close confirmation alert
   };
 
+  const cancelSignup = () => {
+    navigation.push('/ics-quizard/', 'root', 'replace');
+  };
+
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
             <IonBackButton defaultHref="/ics-quizard/login" />
+          </IonButtons>
+          <IonButtons slot="end">
+            <IonButton>Cancel</IonButton>
           </IonButtons>
           <IonTitle></IonTitle>
         </IonToolbar>
@@ -135,16 +143,16 @@ const Register: React.FC = () => {
 
         <IonGrid>
           <IonRow>
-            <IonCol size="5">
-                <IonInput label="Institutional Email" type="email"
-                placeholder="Institutional Email"
+            <IonCol size="8">
+                <IonInput label="Email" type="email"
+                placeholder="Enter Institutional Email"
                 labelPlacement="floating" 
                 fill="outline"
                 value={email}
                 onIonChange={(e) => setEmail(e.detail.value!)}>
                 </IonInput>
             </IonCol>
-            <IonCol>
+            <IonCol size="4">
               <IonSelect
                 label="Year Level"
                 labelPlacement="floating" 
@@ -162,37 +170,41 @@ const Register: React.FC = () => {
           </IonRow>
         </IonGrid>
         
-        <IonGrid>
-          <IonRow>
-            <IonCol size="auto">
-              <IonInput
-                label="Password"
-                type="password"
-                labelPlacement="floating" 
-                fill="outline"
-                placeholder="Enter Password"
-                value={password}
-                onIonChange={(e) => setPassword(e.detail.value!)}
-              >
-              <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
-              </IonInput>
-            </IonCol>
-            <IonCol>
+          <IonGrid>
+            <IonRow>
+              <IonCol size="12">
                 <IonInput
-                label="Confirm Password"
-                type="password"
-                labelPlacement="floating" 
-                fill="outline"
-                placeholder="Confirm Password"
-                value={confirmPassword}
-                onIonChange={(e) => setConfirmPassword(e.detail.value!)}
-              >
-              <IonInputPasswordToggle slot="end"></IonInputPasswordToggle>
-              </IonInput>
-              
-            </IonCol>
-          </IonRow>
-        </IonGrid>
+                  label="New Password"
+                  type="password"
+                  labelPlacement="floating"
+                  fill="outline"
+                  placeholder="Enter New Password"
+                  value={password}
+                  onIonChange={(e) => setPassword(e.detail.value!)}
+                >
+                  <IonInputPasswordToggle slot="end" />
+                </IonInput>
+              </IonCol>
+            </IonRow>
+          </IonGrid>
+  
+          <IonGrid>
+            <IonRow>
+              <IonCol size="12">
+                <IonInput
+                  label="Confirm Password"
+                  type="password"
+                  labelPlacement="floating"
+                  fill="outline"
+                  placeholder="Confirm New Password"
+                  value={confirmPassword}
+                  onIonChange={(e) => setConfirmPassword(e.detail.value!)}
+                >
+                  <IonInputPasswordToggle slot="end" />
+                </IonInput>
+              </IonCol>
+            </IonRow>
+          </IonGrid>
       
         <IonButton expand="full" onClick={handleRegister}  shape="round">
           Register
@@ -230,6 +242,7 @@ const Register: React.FC = () => {
           message={alertMessage}
           buttons={['OK']}
         />
+
       </IonContent>
     </IonPage>
   );

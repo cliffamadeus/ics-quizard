@@ -168,12 +168,9 @@ const EditAccount: React.FC = () => {
     return (
       <IonPage>
         <IonHeader>
-          <IonToolbar>
-            <IonButtons slot="start">
-              <IonBackButton defaultHref="/ics-quizard/app" />
-            </IonButtons>
-            <IonTitle>Edit Account</IonTitle>
-          </IonToolbar>
+          <IonButtons slot="start">
+            <IonBackButton defaultHref="/ics-quizard/app" />
+          </IonButtons>
         </IonHeader>
         <IonContent className="ion-padding">
           <IonItem>

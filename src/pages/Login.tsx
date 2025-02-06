@@ -84,9 +84,9 @@ const Login: React.FC = () => {
         <h4 className='ion-text-center'>Student Login</h4>
         <IonInput
           type="email"
-          labelPlacement="floating" 
+          labelPlacement="stacked"
           fill="outline"
-          label="Institutional Email"
+          label="Email"
           placeholder="email@nbsc.edu.ph"
           value={email}
           onIonChange={(e) => setEmail(e.detail.value!)}
@@ -109,7 +109,7 @@ const Login: React.FC = () => {
           Login
         </IonButton>
 
-        <IonText>
+        <IonText class="ion-text-center">
           <p>Don't have an account? <IonRouterLink routerLink="/ics-quizard/register">Register here</IonRouterLink></p>
         </IonText>
 
