@@ -34,6 +34,7 @@ import '@ionic/react/css/palettes/dark.system.css';
 import './theme/variables.css';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import EditAccount from './pages/EditAccount';
 
 setupIonicReact();
 
@@ -46,6 +47,7 @@ const App: React.FC = () => (
         <Route exact path="/ics-quizard/login" component={Login} />
         <Route exact path="/ics-quizard/register" component={Register} />
         <Route exact path="/ics-quizard/app" component={Home} />
+        <Route exact path="/ics-quizard/editAccount" component={EditAccount} />
       </IonRouterOutlet>
       </IonRouterOutlet>
     </IonReactRouter>

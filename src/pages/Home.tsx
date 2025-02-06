@@ -36,6 +36,11 @@ const Home: React.FC = () => {
     }
   };
 
+  const handleEditAccount = () => {
+    navigation.push('/ics-quizard/editAccount'); // Redirect to editStudent.tsx
+  };
+
+
   return (
     <IonPage>
       <IonHeader>
@@ -64,7 +69,10 @@ const Home: React.FC = () => {
           </IonLabel>
         </IonItem>
       </IonContent>
-
+       {/* Edit Account Button */}
+       <IonButton expand="full" onClick={handleEditAccount}>
+          Edit Account
+        </IonButton>
       {/* Alert to show logout result */}
       <IonAlert
         isOpen={showAlert}
