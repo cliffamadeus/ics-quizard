@@ -10,6 +10,7 @@ export default defineConfig({
     react(),
     legacy()
   ],
+  base:"ics-quizard",
   test: {
     globals: true,
     environment: 'jsdom',
